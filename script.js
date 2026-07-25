@@ -48,10 +48,14 @@ deleteBtn.addEventListener("click", () => {
 
 // for save current tab :
 tabBtn.addEventListener("click", () => {
-  chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-    let activeTab = tabs[0].url;
-    allLinks.push(activeTab);
-    localStorage.setItem("links", JSON.stringify(allLinks));
-    renderArr(allLinks);
+  const extensionApi = typeof browser !== "undefined" ? browser : chrome;
+
+  extensionApi.tabs.query({active: true, currentWindow: true}, function (tabs) {
+    if (tabs && tabs[0] && tabs[0].url) {
+      let activeTab = tabs[0].url;
+      allLinks.push(activeTab);
+      localStorage.setItem("links", JSON.stringify(allLinks));
+      renderArr(allLinks);
+    }
   }); 
 });
