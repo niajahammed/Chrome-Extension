@@ -28,9 +28,9 @@ inputBtn.addEventListener("click", () => {
   let links = input.value;
 
   allLinks.push(links);
-  console.log(allLinks);
+  // console.log(allLinks);
 
-  input.value = '';
+  input.value = "";
 
   localStorage.setItem("links", JSON.stringify(allLinks));
 
